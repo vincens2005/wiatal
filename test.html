@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+	<head>
+		<title>
+			wiatal test page
+		</title>
+		<script src="index.js"></script>
+	</head>
+
+	<body>
+		stuff
+		<h1 id="title"> </h1>
+		<input id="placeholder">
+		<script>
+			wiatal(document.querySelector("#title"), {
+				showCursor: false,
+				strings: ['test test 123', 'test!', 'ajdjKJSFJKS, testing'],
+				loopDelay: 10000
+			})
+
+			wiatal("#placeholder", {
+				placeholder: true,
+				showCursor: false
+			})
+		</script>
+	</body>
+
+</html>

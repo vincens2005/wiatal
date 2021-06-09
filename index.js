@@ -58,14 +58,14 @@ function wiatal(element, config) {
   }
   
   function erase_string() {
-    let str = config.placeholder ? element.placeholder : element.textContent
+    let str = config.placeholder ? element.placeholder : element.textContent;
     let str_l = str.length;
     let interval = setInterval(() => {
       if (config.placeholder) {
         element.placeholder = str.substr(0, --str_l);
       }
       else {
-        element.textContent += str.substr(0, --str_l);
+        element.textContent = str.substr(0, --str_l);
       }
       if (str_l == 0) {
         return string_erased(interval);
@@ -87,9 +87,17 @@ function wiatal(element, config) {
   }
   
   function start_typing() {
+    if (!element) {
+      console.error("wiatal: no element defined");
+      return;
+    }
     config = fill_defaults(config);
     length = config.strings.length;
     if (typeof element == "string") element = document.querySelector(element);
+    if (!element) {
+      console.error("wiatal: element does not exist");
+      return;
+    }
     if (config.showCursor) set_cursor(element, config);
     typewrite();
   }
