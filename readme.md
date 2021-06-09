@@ -18,13 +18,13 @@
     also not yet
   
   ### browser
-    [https://cdn.jsdelivr.net/gh/vincens2005/wiatal/index.min.js](https://cdn.jsdelivr.net/gh/vincens2005/wiatal/index.min.js)
+    https://cdn.jsdelivr.net/gh/vincens2005/wiatal/index.min.js
   
 ## CSS
   uses the same `.ityped-cursor` class as ityped for maximum compatibility
   you can style it to blink, etc.
   
-## Note: has not been tested with react or anything so just use iTyped if you use react since it'll be bloat anyway
+### Note: has not been tested with react or anything so just use iTyped if you use react since it'll be bloat anyway
 
 ## All settings:
   ```javascript
