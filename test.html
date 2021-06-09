@@ -12,16 +12,23 @@
 		stuff
 		<h1 id="title"> </h1>
 		<input id="placeholder">
+		<h3 id="default">
+			
+		</h3>
 		<script>
 			wiatal(document.querySelector("#title"), {
 				showCursor: false,
 				strings: ['test test 123', 'test!', 'ajdjKJSFJKS, testing'],
 				loopDelay: 10000
-			})
+			});
 
 			wiatal("#placeholder", {
 				placeholder: true,
 				showCursor: false
+			});
+			
+			wiatal("#default", {
+				strings: ["test", "more stuff", "AAAAA", "idk what elese to put here"]
 			})
 		</script>
 	</body>
