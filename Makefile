@@ -1,3 +1,3 @@
-# npm install uglify-js -g
+# npm install terser -g
 default:
-	uglifyjs --timings -mco index.min.js index.js
+	terser index.js --config-file terser_conf.json -o index.min.js

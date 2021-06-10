@@ -1,6 +1,9 @@
 function wiatal(element, config) {
   let i = 0, length;
   
+  // so that terser shrinks the names (more compression)
+  let set_timeout = setTimeout, set_interval = setInterval, clear_interval = clearInterval, error = console.error;
+  
   let fill_defaults = (data) => {
     let defaults = {
       strings: ['Put your strings here...', 'and Enjoy!'],
@@ -23,7 +26,7 @@ function wiatal(element, config) {
       defaults[i] = data[i]; 
     }
     return defaults;
-  }
+  };
   
   let typewrite = () => {
     let extra_delay = 0;
@@ -31,12 +34,12 @@ function wiatal(element, config) {
       i = 0;
       extra_delay = config.loopDelay;
     }
-    setTimeout(() => { type_string(config.strings[i]); }, config.startDelay + extra_delay);
-  }
+    set_timeout(() => { type_string(config.strings[i]); }, config.startDelay + extra_delay);
+  };
   
   let type_string = (str) => {
     let index = 0, str_l = str.length;
-    let interval = setInterval(() => {
+    let interval = set_interval(() => {
       if (config.placeholder) {
         element.placeholder += str[index];
       }
@@ -47,20 +50,20 @@ function wiatal(element, config) {
         return string_typed(interval);
       }
     }, config.typeSpeed);
-  }
+  };
   
   let string_typed = (interval) => {
-    clearInterval(interval);
+    clear_interval(interval);
     if ((config.disableBacktyping || !config.loop) && i == length - 1) {
       return config.onFinished();
     }
-    setTimeout(() => erase_string(), config.backDelay);
-  }
+    set_timeout(() => erase_string(), config.backDelay);
+  };
   
   let erase_string = () => {
     let str = config.placeholder ? element.placeholder : element.textContent;
     let str_l = str.length;
-    let interval = setInterval(() => {
+    let interval = set_interval(() => {
       if (config.placeholder) {
         element.placeholder = str.substr(0, --str_l);
       }
@@ -71,15 +74,16 @@ function wiatal(element, config) {
         return string_erased(interval);
       }
     }, config.backSpeed);
-  }
+  };
   
   let string_erased = (interval) => {
-    clearInterval(interval);
+    clear_interval(interval);
     ++i;
     typewrite();
   };
   
-  let set_cursor = (e) => {
+  let set_cursor = () => {
+    let e = element;
     let cursorSpan = document.createElement('span');
     cursorSpan.classList.add('ityped-cursor');
     cursorSpan.textContent = config.cursorChar;
@@ -88,17 +92,17 @@ function wiatal(element, config) {
   
   let start_typing = () => {
     if (!element) {
-      console.error("wiatal: no element defined");
+      error("wiatal: no element defined");
       return;
     }
     config = fill_defaults(config);
     length = config.strings.length;
     if (typeof element == "string") element = document.querySelector(element);
     if (!element) {
-      console.error("wiatal: element does not exist");
+      error("wiatal: element does not exist");
       return;
     }
-    if (config.showCursor) set_cursor(element);
+    if (config.showCursor && !config.placeholder) set_cursor();
     typewrite();
   };
   

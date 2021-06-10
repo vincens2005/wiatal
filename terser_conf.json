@@ -1,0 +1,8 @@
+{
+  "mangle": {
+    "reserved": ["wiatal"]
+  },
+  "compress": {},
+  "timings": {},
+  "ecma": 9
+}

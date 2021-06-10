@@ -1,9 +1,9 @@
 # WIATAL - Wiatal Is A Typing Animation Library
 
-> inspired by [iTyped](https://github.com/luisvinicius167/ityped), but 1/4 the size
+> inspired by [iTyped](https://github.com/luisvinicius167/ityped), but 1/2 the size
 
 ## Features:
-  - extra tiny: 538b minified
+  - extra tiny: 1kb minified, 0.5kb gzipped
   - no dependencies
   - just works
   - drop-in replacement for iTyped
@@ -92,7 +92,7 @@
      * @property {Function} onFinished The callback called , if `loop` is false,
      * once the last string was typed
      */
-    onFinished: function(){},
+    onFinished: () => {},
   });
   ```
 lmk if use use it, that'd be pretty epick
