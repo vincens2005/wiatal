@@ -1,7 +1,7 @@
 function wiatal(element, config) {
   let i = 0, length;
   
-  function fill_defaults(data) {
+  let fill_defaults = (data) => {
     let defaults = {
       strings: ['Put your strings here...', 'and Enjoy!'],
       typeSpeed: 150,
@@ -25,7 +25,7 @@ function wiatal(element, config) {
     return defaults;
   }
   
-  function typewrite() {
+  let typewrite = () => {
     let extra_delay = 0;
     if (i == length) {
       i = 0;
@@ -34,7 +34,7 @@ function wiatal(element, config) {
     setTimeout(() => { type_string(config.strings[i]); }, config.startDelay + extra_delay);
   }
   
-  function type_string(str) {
+  let type_string = (str) => {
     let index = 0, str_l = str.length;
     let interval = setInterval(() => {
       if (config.placeholder) {
@@ -49,7 +49,7 @@ function wiatal(element, config) {
     }, config.typeSpeed);
   }
   
-  function string_typed(interval) {
+  let string_typed = (interval) => {
     clearInterval(interval);
     if ((config.disableBacktyping || !config.loop) && i == length - 1) {
       return config.onFinished();
@@ -57,7 +57,7 @@ function wiatal(element, config) {
     setTimeout(() => erase_string(), config.backDelay);
   }
   
-  function erase_string() {
+  let erase_string = () => {
     let str = config.placeholder ? element.placeholder : element.textContent;
     let str_l = str.length;
     let interval = setInterval(() => {
@@ -73,20 +73,20 @@ function wiatal(element, config) {
     }, config.backSpeed);
   }
   
-  function string_erased(interval) {
+  let string_erased = (interval) => {
     clearInterval(interval);
     ++i;
     typewrite();
-  }
+  };
   
-  function set_cursor(e, p) {
+  let set_cursor = (e) => {
     let cursorSpan = document.createElement('span');
     cursorSpan.classList.add('ityped-cursor');
-    cursorSpan.textContent = p.cursorChar;
+    cursorSpan.textContent = config.cursorChar;
     e.insertAdjacentElement('afterend', cursorSpan);
-  }
+  };
   
-  function start_typing() {
+  let start_typing = () => {
     if (!element) {
       console.error("wiatal: no element defined");
       return;
@@ -98,9 +98,9 @@ function wiatal(element, config) {
       console.error("wiatal: element does not exist");
       return;
     }
-    if (config.showCursor) set_cursor(element, config);
+    if (config.showCursor) set_cursor(element);
     typewrite();
-  }
+  };
   
   return start_typing();
 }
